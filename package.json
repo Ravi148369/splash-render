@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node src/index.js",
     "clean": "rm -rf splash-api",
-    "build": "npm run clean && babel src --out-dir lib --copy-files -d splash-api",
     "serve": "node splash-api/index.js",
     "migration": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
