@@ -1,0 +1,99 @@
+paths:       
+  /update-profile :
+    put:                
+      tags:               
+        - User           
+      summary: User Update Profile
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:         
+      - in: body          
+        name: update-profile     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-profile' 
+      responses:          
+        '200':
+          description: An object
+  /payment-setting:
+    get:                
+        tags:               
+          - User           
+        summary: Get payment setting
+        produces:
+        - application/json
+        security:
+          - BearerAuth: []   
+        responses:          
+          "200":
+            description: An object 
+  /owner/{id}:
+    get:                
+      tags:               
+       - User           
+      summary: Get Owner Detail
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object with Owner Detail            
+  /profile-completion:
+    get:                
+        tags:               
+          - User           
+        summary: Get profile-completion percentage
+        produces:
+        - application/json
+        security:
+          - BearerAuth: []   
+        responses:          
+          "200":
+            description: An object 
+         
+
+definitions: 
+  update-profile:
+    type: object
+    properties:
+      firstName:
+        type: string 
+      lastName:
+        type: string
+      gender: 
+        type: string
+        enum: [male, female]
+        required: true  
+      dateOfBirth:
+          type: string
+          required: true
+          description: Please format YYYY-MM-DD      
+      email:
+        type: string
+      countryCode:
+        type: string 
+      phoneNumber:
+        type: string      
+      language:
+        type: string      
+      currency:
+        type: string      
+      whereYouLive:
+        type: string      
+      describeYourself:
+        type: string      
+      profileImage:
+        type: string
+       
+       
+         
+  

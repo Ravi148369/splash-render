@@ -1,0 +1,106 @@
+paths:       
+  /boat-setting/boat-feature:  
+    post:                
+      tags:               
+        - Boat Setting           
+      summary: Add Boat Feature In Boat Setting
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: boat-Feature     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/boat-Feature' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Boat Setting           
+     summary: Get All Boat Feature
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []     
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: scope
+          type: string
+          enum:
+            - 'all'
+          description:
+          required: false   
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false      
+     responses:          
+       200:
+         description: An array of object  
+
+  /boat-setting/boat-feature/{id}:
+    put:                
+      tags:               
+        - Boat Setting           
+      summary: Boat Feature Update
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:  
+      - in: path
+        name: id
+        type: integer
+        required: true        
+      - in: body          
+        name: boat-Feature    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/boat-Feature' 
+      responses:          
+        '200':
+          description: An object       
+    get:                
+      tags:               
+        - Boat Setting        
+      summary: Get One Boat Feature
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object                                   
+  
+ 
+definitions: 
+  boat-Feature :
+    type: object
+    properties:
+      name:
+        type: string 
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'inactive'      
+      

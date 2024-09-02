@@ -1,0 +1,12 @@
+/node_modules
+.env
+.vscode
+# logs
+/src/logs/*.log
+/src/logs
+# splash-api
+/splash-api
+/public/uploads
+.scannerwork/
+ansible
+Jenkinsfile

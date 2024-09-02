@@ -1,0 +1,72 @@
+paths:       
+  /admin/about-us-page-setting:  
+    post:                
+      tags:               
+        - Admin         
+      summary: Add About us Page Setting
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: About us Page Setting     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/about-us-page-setting' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Admin           
+     summary: Get About us Page Setting
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: type
+          type: string
+          enum:
+            - 'block1'
+            - 'block2'
+            - 'block3'
+            - 'block4'
+          description:
+          required: false       
+     responses:          
+       200:
+         description: An array of object                               
+  
+ 
+definitions: 
+  about-us-page-setting :
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+            - 'block1'
+            - 'block2'
+            - 'block3'
+            - 'block4'     
+      aboutUsPageImage:
+        type: string
+      subTitle:
+        type: string
+      title:
+        type: string
+      content:
+        type: string
+      title2:
+        type: string
+      content2:
+        type: string
+      title3:
+        type: string
+      content3:
+        type: string
+      

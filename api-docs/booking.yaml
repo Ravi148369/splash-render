@@ -1,0 +1,515 @@
+paths:       
+  /boat-booking:
+    post:                
+      tags:               
+        - Boat           
+      summary: Add boat booking
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: booking    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/add-booking'   
+      responses:          
+        "200":
+          description: An object  
+    get:
+        tags:
+          - Boat
+        summary: Booking List
+        produces:
+          - application/json
+        security:
+        - BearerAuth: [] 
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: offset
+            type: integer
+            required: false
+          - in: query
+            name: status
+            type: string
+            enum:
+              - 'pending'
+              - 'completed'
+          - in: query
+            name: scope
+            type: string
+            enum:
+              - 'all'
+            required: false
+          - in: query
+            name: bookingDate
+            type: date
+            required: false
+          - in: query
+            name: boatId
+            type: integer
+            required: false
+          - in: query
+            name: search
+            type: string
+            required: false  
+          - in: query
+            name: sortBy
+            enum: ['bookingDate', 'code', 'status', 'boatName', 'subTotal', 'refund', 'payout' ]
+            type: string
+            required: false
+          - in: query
+            name: sortType
+            enum: ['ASC', 'DESC']
+            type: string
+            required: false        
+        responses:
+          '200':
+            description: OK                        
+  /boat-booking/{id}/checkout:
+    post:                
+      tags:               
+        - Boat           
+      summary: booking payment confirmation
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true  
+      - in: body          
+        name: booking    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/booking-checkout'   
+      responses:          
+        "200":
+          description: An object 
+  /event-booking:
+    post:                
+      tags:               
+        - Event           
+      summary: Add event booking
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: booking    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/add-event-booking'   
+      responses:          
+        "200":
+          description: An object          
+  /event-booking/{id}/checkout:
+    post:                
+      tags:               
+        - Event           
+      summary: Event booking payment confirmation
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      - in: body          
+        name: booking    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/event-booking-checkout'   
+      responses:          
+        "200":
+          description: An object      
+  /event-booking/your-events: 
+    get:                
+     tags:               
+       - Event          
+     summary: Get event booking list
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: scope
+          type: string
+          enum:
+            - 'all'
+          description:
+          required: false 
+        - in: query
+          name: type
+          type: string
+          enum:
+            - 'upcoming'
+            - 'previous'
+          description:
+          required: false  
+        - in: query
+          name: sortBy
+          enum: ['event', 'userName', 'date', 'status', 'numberOfAttendees', ]
+          type: string
+          required: false
+        - in: query
+          name: sortType
+          enum: ['ASC', 'DESC']
+          type: string
+          required: false   
+        - in: query
+          name: search
+          type: string
+          required: false             
+     responses:          
+       200:
+         description: An array of object   
+  /your-trips: 
+    get:                
+     tags:               
+       - Boat          
+     summary: Get boat booking list
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: scope
+          type: string
+          enum:
+            - 'all'
+          description:
+          required: false 
+        - in: query
+          name: type
+          type: string
+          enum:
+            - 'upcoming'
+            - 'previous'
+          description:
+          required: false       
+     responses:          
+       200:
+         description: An array of object    
+  /your-reservations: 
+    get:                
+     tags:               
+       - Boat          
+     summary: Get boat reservations list
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: scope
+          type: string
+          enum:
+            - 'all'
+          description:
+          required: false 
+        - in: query
+          name: type
+          type: string
+          enum:
+            - 'upcoming'
+            - 'previous'
+          description:
+          required: false       
+     responses:          
+       200:
+         description: An array of object   
+  /boat-booking/{id} :
+    get:                
+      tags:               
+       - Boat           
+      summary: Get Boat Booking Detail
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object with Boat Booking Detail
+  /event-booking/{id} :
+    get:                
+      tags:               
+       - Event           
+      summary: Get Event Booking Detail
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object with event booking Detail   
+  /boat-booking/{id}/booking-cancellation:                 
+    put:                
+      tags:               
+        - Boat           
+      summary: Boat booking cancellation
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: booking-cancellation    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/booking-cancellation'    
+      responses:          
+        '200':
+          description: An object 
+  /boat-booking/{id}/refund:
+    post:                
+      tags:               
+        - Boat           
+      summary: booking payment refund
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true  
+      responses:          
+        "200":
+          description: An object 
+  /boat-booking/{id}/transfer:
+    post:                
+      tags:               
+        - Boat           
+      summary: Transfer amount to owner
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true  
+      responses:          
+        "200":
+          description: An object 
+  /event-booking/{id}/booking-cancellation:                 
+    put:                
+      tags:               
+        - Event           
+      summary: Event booking cancellation
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: booking-cancellation    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/booking-cancellation'    
+      responses:          
+        '200':
+          description: An object        
+  /event-booking/{id}/refund:
+    post:                
+      tags:               
+        - Event           
+      summary: Event booking payment refund
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true  
+      responses:          
+        "200":
+          description: An object  
+  /boat-booking/{id}/calculate-refund-amount:
+    get:                
+      tags:               
+        - Boat           
+      summary: calculate booking refund amount
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true  
+      responses:          
+        "200":
+          description: An object     
+  /event-booking/{id}/calculate-refund-amount:
+    get:                
+      tags:               
+        - Event           
+      summary: calculate event booking refund amount
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true  
+      responses:          
+        "200":
+          description: An object                              
+
+definitions:     
+  add-booking:
+    type: object
+    properties:
+      boatId:
+        type: integer
+      duration:
+        type: integer
+        enum:
+         - 4
+         - 6
+         - 8
+         - 24
+      bookingDate:
+        type: date
+      startTime:
+        type: string
+      endTime:
+        type: string
+      amount:
+        type: integer 
+      currency:
+        type: string   
+      identityNumber:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      mobileNumber:
+        type: string
+      description: 
+        type: string
+      dateOfBirth:
+        type: date
+      countryId: 
+        type: integer    
+      bookingRequestId: 
+        type: integer   
+  booking-checkout:
+    type: object
+    properties:
+      token:
+        type: string
+      boatId:
+        type: integer
+  add-event-booking:
+    type: object
+    properties:
+      eventId:
+        type: integer
+      adults:
+        type: integer
+      children:
+        type: integer
+      amount:
+        type: integer 
+      currency:
+        type: string   
+      identityNumber:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      mobileNumber:
+        type: string
+      dateOfBirth:
+        type: date
+      countryId: 
+        type: integer  
+  event-booking-checkout:
+    type: object
+    properties:
+      token:
+        type: string
+      eventId:
+        type: integer  
+  booking-cancellation:  
+    type: object
+    properties:
+      reason:
+        type: string                  
+      

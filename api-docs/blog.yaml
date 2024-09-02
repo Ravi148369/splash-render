@@ -1,0 +1,159 @@
+paths:       
+  /admin/blog:
+    post:                
+      tags:               
+        - Admin           
+      summary: Add blog
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: blog    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-update-blog'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - Admin           
+        summary: Get blog list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false  
+        - in: query
+          name: sortBy
+          enum: ['id', 'title', 'url']
+          type: string
+          required: false
+        - in: query
+          name: sortType
+          enum: ['ASC', 'DESC']
+          type: string
+          required: false     
+        responses:          
+          "200":
+            description: An object 
+  /admin/blog/{id}:                 
+    get:                
+      tags:               
+        - Admin           
+      summary: Get blog detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object 
+    put:                
+      tags:               
+        - Admin           
+      summary: Update blog Details
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: blog    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-update-blog'    
+      responses:          
+        '200':
+          description: An object     
+    delete:                
+      tags:               
+        - Admin           
+      summary: Delete blog
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      responses:          
+        '200':
+          description: An object                
+  /admin/blog/{id}/change-status:                 
+    put:                
+      tags:               
+        - Admin           
+      summary: blog update status
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: blog update status     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-blog-status'    
+      responses:          
+        '200':
+          description: An object                      
+definitions: 
+  update-blog-status :
+    type: object
+    properties:
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'deleted'    
+  add-update-blog :
+    type: object
+    properties:
+      blogImage:
+        type: string
+      title:
+        type: string
+      url:
+        type: string                     
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'deleted'     
+       
+         
+  

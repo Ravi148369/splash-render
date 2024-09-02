@@ -1,0 +1,186 @@
+paths:       
+  /admin/popular-location:
+    post:                
+      tags:               
+        - Admin           
+      summary: Add popular location
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: popular location     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-update-popular-location'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - Admin           
+        summary: Get popular location list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false  
+        - in: query
+          name: sortBy
+          enum: ['id', 'location', 'locationAddress', 'status']
+          type: string
+          required: false
+        - in: query
+          name: sortType
+          enum: ['ASC', 'DESC']
+          type: string
+          required: false        
+        responses:          
+          "200":
+            description: An object 
+  /admin/popular-location/{id}:                 
+    get:                
+      tags:               
+        - Admin           
+      summary: Get popular location detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object 
+    put:                
+      tags:               
+        - Admin           
+      summary: Update popular location Details
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: popular location     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-update-popular-location'    
+      responses:          
+        '200':
+          description: An object      
+    delete:                
+      tags:               
+        - Admin           
+      summary: Delete popular location
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      responses:          
+        '200':
+          description: An object              
+  /admin/popular-location/{id}/change-status:                 
+    put:                
+      tags:               
+        - Admin           
+      summary: popular location update status
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: popular location update status     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-popular-location-status'    
+      responses:          
+        '200':
+          description: An object    
+  /user/popular-location:
+    get:                
+        tags:               
+          - User           
+        summary: Get popular location list for user
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        responses:          
+          "200":
+            description: An array of object                           
+definitions: 
+  update-popular-location-status :
+    type: object
+    properties:
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'inactive'
+          - 'deleted'    
+  add-update-popular-location :
+    type: object
+    properties:
+      popularLocationImage:
+        type: string
+      location:
+        type: string
+      locationAddress:
+        type: string  
+      latitude:
+        type: string
+      longitude:
+        type: string                     
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'inactive'
+          - 'deleted'     
+       
+         
+  

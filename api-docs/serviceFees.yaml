@@ -1,0 +1,55 @@
+paths:       
+  /admin/service-fees:  
+    post:                
+      tags:               
+        - Admin         
+      summary: Add and Update Service Fees
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: Service Fees    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/service-fees' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Admin           
+     summary: Get Service Fees
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []             
+     responses:          
+       200:
+         description: An object    
+  /service-fees:            
+    get:                
+     tags:               
+       - User           
+     summary: Get Service Fees
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []             
+     responses:          
+       200:
+         description: An object                                      
+  
+ 
+definitions: 
+  service-fees:
+    type: object
+    properties:
+      renterFees:
+        type: integer
+      ownerFees:
+        type: integer
+      currency:
+        type: string

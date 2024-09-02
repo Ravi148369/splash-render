@@ -1,0 +1,119 @@
+paths:       
+  /user/document:
+    post:                
+      tags:               
+        - User           
+      summary: Add user document
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: document    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-user-document'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - User           
+        summary: Get user document list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: []   
+        responses:          
+          "200":
+            description: An object 
+  /admin/user-document:                 
+    get:                
+      tags:               
+        - Admin           
+      summary: Get users document list
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+        required: false
+      - in: query
+        name: offset
+        type: integer
+        required: false 
+      - in: query
+        name: search
+        type: string
+        required: false     
+      responses:          
+        "200":
+          description: An object        
+  /admin/user-document/{id}/change-status:                 
+    put:                
+      tags:               
+        - Admin           
+      summary: blog update status
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: blog update status     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-user-document-status'    
+      responses:          
+        '200':
+          description: An object      
+  /user/document/{id}:                 
+    delete:                
+      tags:               
+        - User           
+      summary: User document deleted
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      responses:          
+        '200':
+          description: An object                           
+definitions: 
+  update-user-document-status :
+    type: object
+    properties:
+      status:
+        type: string
+        enum: 
+          - 'approve'
+          - 'reject'    
+  add-user-document :
+    type: object
+    properties:
+      userDocument:
+        type: string
+      userId:
+        type: string                    
+      status:
+        type: string
+        enum: 
+          - 'pending'
+       
+         
+  

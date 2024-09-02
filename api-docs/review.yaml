@@ -1,0 +1,202 @@
+paths:       
+  /admin/admin-review:
+    post:                
+      tags:               
+        - Admin           
+      summary: Add Admin Review
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: Admin Review    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-admin-review'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - Admin           
+        summary: Get Admin Review list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false  
+        responses:          
+          "200":
+            description: An object 
+  /admin/admin-review/{id}:                 
+    get:                
+      tags:               
+        - Admin           
+      summary: Get Admin Review detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object 
+    put:                
+      tags:               
+        - Admin           
+      summary: Update Admin Review Details
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: Admin Review    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-admin-review'    
+      responses:          
+        '200':
+          description: An object         
+    delete:                
+      tags:               
+        - Admin           
+      summary: Admin Review Deleted
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      responses:          
+        '200':
+          description: An object
+  /user/review:
+    post:                
+      tags:               
+        - User           
+      summary: Add user Review
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: Review    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-admin-review'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - User           
+        summary: Get User and Boat Review list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: boatId
+          type: integer
+          description:
+          required: false  
+        responses:          
+          "200":
+            description: An object   
+  /admin/admin-review/{id}/change-status:                 
+    put:                
+      tags:               
+        - Admin           
+      summary: Update Admin Review Status
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: Admin Review status   
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-admin-review-status'    
+      responses:          
+        '200':
+          description: An object                                               
+definitions: 
+  update-admin-review :
+    type: object
+    properties:
+      boatId:
+        type: integer
+      content:
+        type: string   
+  add-admin-review :
+    type: object
+    properties:
+      boatId:
+        type: integer
+      content:
+        type: string    
+  add-review :
+    type: object
+    properties:
+      boatId:
+        type: integer
+      booking:
+        type: integer                            
+      content:
+        type: string   
+  update-admin-review-status:  
+    type: object
+    properties:                           
+      status:
+        type: string
+        enum: 
+          - 'active' 
+          - 'inactive'        
+       
+         
+  

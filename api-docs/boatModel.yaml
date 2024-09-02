@@ -1,0 +1,122 @@
+paths:       
+  /boat-setting/boat-model:  
+    post:                
+      tags:               
+        - Boat Setting           
+      summary: Add Boat Model In Boat Setting
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: boat-model     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/boat-model' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Boat Setting           
+     summary: Get All Boat Model
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []     
+     parameters:
+      - in: query
+        name: makeId
+        type: integer
+        required: false  
+      - in: query
+        name: limit
+        type: integer
+        required: false
+      - in: query
+        name: offset
+        type: integer
+        required: false
+      - in: query
+        name: scope
+        type: string
+        enum:
+          - 'all'
+        description:
+        required: false 
+      - in: query
+        name: search
+        type: string
+        description:
+        required: false    
+     responses:          
+       200:
+         description: An array of object  
+
+  /boat-setting/boat-model/{id}:
+    put:                
+      tags:               
+        - Boat Setting           
+      summary: Boat Model Update
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:  
+      - in: path
+        name: id
+        type: integer
+        required: true        
+      - in: body          
+        name: boat-model    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-boat-model' 
+      responses:          
+        '200':
+          description: An object       
+    get:                
+      tags:               
+        - Boat Setting        
+      summary: Get One Boat Model
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object                                   
+  
+ 
+definitions: 
+  boat-model :
+    type: object
+    properties:
+      name:
+        type: string 
+      makeId:
+        type: integer 
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'inactive'  
+  update-boat-model :
+    type: object
+    properties:
+      name:
+        type: string 
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'inactive'             
+      

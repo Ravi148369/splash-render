@@ -1,0 +1,188 @@
+paths:       
+  /booking-request:
+    post:                
+      tags:               
+        - Message           
+      summary: Add Booking request
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: booking    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/add-booking-request'   
+      responses:          
+        "200":
+          description: An object  
+    get:                
+     tags:               
+       - Message          
+     summary: Get Booking request list
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: scope
+          type: string
+          enum:
+            - 'all'
+          description:
+          required: false 
+        - in: query
+          name: type
+          type: string
+          enum:
+            - 'renter'
+            - 'owner'
+          description:
+          required: false   
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false      
+     responses:          
+       200:
+         description: An array of object           
+  /booking-request/{id} :
+    get:                
+      tags:               
+       - Message           
+      summary: Get Booking request Detail
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object with Booking Request Detail          
+  /booking-request/{id}/message:
+    post:                
+      tags:               
+        - Message           
+      summary: Add boat booking request message
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true    
+      - in: body          
+        name: booking    
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/add-booking-request-message'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+     tags:               
+       - Message          
+     summary: Get Booking request Message list
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true   
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: scope
+          type: string
+          enum:
+            - 'all'
+          description:
+          required: false      
+     responses:          
+       200:
+         description: An array of object     
+  /booking-request/{id}/approval :
+    put:                
+      tags:               
+       - Message           
+      summary: Update booking request status
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object      
+  /booking-request/{id}/booking :
+    get:                
+      tags:               
+       - Message           
+      summary: Get booking detail by request id
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object                                
+            
+definitions:     
+  add-booking-request:
+    type: object
+    properties:
+      boatId:
+        type: integer
+      duration:
+        type: integer
+      bookingDate:
+        type: date
+      startTime:
+        type: string
+      endTime:
+        type: string
+      message:
+        type: string      
+  add-booking-request-message:
+    type: object
+    properties:
+      message:
+        type: string   
+      

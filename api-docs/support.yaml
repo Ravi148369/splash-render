@@ -1,0 +1,35 @@
+paths:       
+  /contact-support:  
+    post:                
+      tags:               
+        - Contact & Support         
+      summary: Add Contact and Support
+      produces:
+      - application/json
+      parameters:        
+      - in: body          
+        name: Support     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/contact-support' 
+      responses:          
+        '200':
+          description: An object                                     
+  
+ 
+definitions: 
+  contact-support :
+    type: object
+    properties: 
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      email:
+        type: string
+      message:
+        type: string
+      

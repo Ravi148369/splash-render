@@ -1,0 +1,55 @@
+paths:       
+  /report:  
+    post:                
+      tags:               
+        - Report         
+      summary: Add user report
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: report    
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-report' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Report           
+     summary: Get all report
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false        
+     responses:          
+       200:
+         description: An array of object                               
+  
+ 
+definitions: 
+  add-report :
+    type: object
+    properties:
+      toUserId:
+        type: integer
+      reportedType:
+        type: string

@@ -1,0 +1,484 @@
+paths:       
+  /admin/login:              
+    post:                
+      tags:               
+        - Auth           
+      summary: Admin Login
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: login     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/login' 
+      responses:          
+        200:
+          description: An object with user
+  /signup:
+    post:
+      tags:
+        - Account
+      summary: User sign up
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Sign up
+          required: true
+          schema:
+            "$ref": "#/definitions/addUser"
+      responses:
+        '200':
+          description: OK
+  /login:              
+    post:                
+      tags:               
+        - Account           
+      summary: User Login
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: login     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/account-login' 
+      responses:          
+        200:
+          description: An object with user                    
+  /account/logout:              
+    post:                
+      tags:               
+        - Account           
+      summary: Logout all account
+      security:
+        - BearerAuth: []
+      produces:
+        - application/json      
+      responses:          
+        200:
+          description: An object with user         
+  /account/change-password:
+    post:
+      tags:               
+        - Account     
+      summary: Change password
+      security:
+        - BearerAuth: []
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: change-password     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/change-password' 
+      responses:
+        '200':
+          description: OK
+  /account/me:              
+   get:                
+     tags:               
+       - Account           
+     summary: My account information
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     responses:          
+       200:
+         description: An object with user                              
+  
+  /admin/forgot-password :              
+    post:                
+      tags:               
+        - Auth           
+      summary: Admin forgot password
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: forgot-password     
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/admin-forgot-password'
+      responses:          
+        200:
+          description: An object
+  /admin/reset-password:
+    post:
+      tags:               
+        - Auth     
+      summary: Admin reset password 
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: reset-password
+        description: Reset password 
+        required: false
+        schema:          
+          $ref: '#/definitions/admin-reset-password' 
+      responses:
+        '200':
+          description: OK   
+  /account/forgot-password :              
+    post:                
+      tags:               
+        - Account            
+      summary: Account forgot password
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: forgot-password     
+        description: Account forgot password
+        required: true
+        schema:          
+          $ref: '#/definitions/account-forgot-password'
+      responses:          
+        200:
+          description: An object
+  /account/reset-password:
+    post:
+      tags:               
+        - Account     
+      summary: Account reset password 
+      produces:
+      - application/json
+      parameters:         
+      - in: body          
+        name: reset-password
+        description: Account reset password 
+        required: false
+        schema:          
+          $ref: '#/definitions/account-reset-password' 
+      responses:
+        '200':
+          description: OK 
+                        
+  /update-profile-image :              
+    post:                
+      tags:               
+        - Auth           
+      summary: Update profile Image
+      produces:
+      - application/json
+      security:
+       - BearerAuth: []
+      parameters:         
+      - in: body          
+        name: update-profile-image     
+        description:
+        required: true
+        schema:          
+          $ref: '#/definitions/update-profile-image'
+      responses:          
+        200:
+          description: An object
+  /account/social-login:
+    post:
+      tags:
+        - Account
+      summary: User social login
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: social login
+          required: true
+          schema:
+            "$ref": "#/definitions/add-user-social-login"
+      responses:
+        '200':
+          description: OK   
+  /account/user/verify:
+    post:
+      tags:
+        - Account
+      summary: User account verify
+      produces:
+        - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+        - in: body
+          name: verify
+          required: true
+          schema:
+            "$ref": "#/definitions/user-account-verify"
+      responses:
+        '200':
+          description: OK   
+    get:                
+      tags:               
+        - Account           
+      summary: Get user verification detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []      
+      responses:          
+        200:
+          description: An object with user verification detail         
+  /account/verification/send-otp :              
+    post:                
+      tags:               
+        - Account            
+      summary: For verification otp sent
+      produces:
+        - application/json
+      security:
+        - BearerAuth: []            
+      responses:          
+        200:
+          description: An object        
+  /account/verification/verify-otp :              
+    post:                
+      tags:               
+        - Account            
+      summary: otp verification
+      produces:
+        - application/json
+      security:
+        - BearerAuth: []      
+      parameters:
+        - in: body
+          name: otp-verify
+          required: true
+          schema:
+            "$ref": "#/definitions/user-otp-verify"        
+      responses:          
+        200:
+          description: An object  
+  /account/signup/resend-otp :              
+    post:                
+      tags:               
+        - Account            
+      summary: For verification otp resent
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: otp-resend
+          required: true
+          schema:
+            "$ref": "#/definitions/signup-otp-resend"                  
+      responses:          
+        200:
+          description: An object               
+  /account/signup/verify-otp :              
+    post:                
+      tags:               
+        - Account            
+      summary: otp verification
+      produces:
+        - application/json     
+      parameters:
+        - in: body
+          name: otp-verify
+          required: true
+          schema:
+            "$ref": "#/definitions/signup-otp-verify"        
+      responses:          
+        200:
+          description: An object                                  
+definitions: 
+  login:
+    type: object
+    properties:
+      email:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+      deviceId:
+        type: string
+        required: true
+      deviceType:
+        type: string
+        enum: 
+          - 'web'
+          - 'android'
+          - 'ios'  
+        required: true
+      firebaseToken:
+        type: string
+        required: true 
+  change-password:
+    type: object
+    properties:
+      currentPassword:
+        type: string
+      newPassword:
+        type: string
+      confirmNewPassword:
+        type: string
+  admin-forgot-password:
+    type: object
+    properties:
+      email:
+        type: string                          
+  admin-reset-password :
+    type: object
+    properties:
+      token:
+        type: string
+      newPassword :
+        type: string
+      confirmPassword:
+        type: string  
+  check-email-username :
+    type: object
+    properties:
+      email :
+        type: string
+      username:
+        type: string 
+      countryCode:
+        type: string 
+      phoneNumber:
+        type: string 
+      id:
+        type: integer  
+  account-login:
+    type: object
+    properties:
+      email:
+        type: string
+        required: true
+      password:
+        type: string
+        required: true
+      deviceId:
+        type: string
+        required: true
+      deviceType:
+        type: string
+        enum: 
+          - 'web'
+          - 'android'
+          - 'ios'  
+        required: true
+      firebaseToken:
+        type: string
+        required: true           
+  account-forgot-password:
+      type: object
+      properties:
+       email:
+         type: string
+         required: true   
+  account-reset-password :
+     type: object
+     properties:
+      token:
+        type: string
+      newPassword :
+        type: string
+      confirmPassword:
+        type: string             
+  update-profile-image :
+     type: object
+     properties:
+      profileImage:
+        type: string
+  addUser:
+    type: object
+    properties:
+      firstName:
+          type: string
+          required: true
+      email:
+          type: string
+          format: email
+          required: true
+      password:
+          type: string
+          required: true    
+      dateOfBirth:
+          type: string
+          required: true
+          description: Please format YYYY-MM-DD   
+  add-user-social-login:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      socialId:
+        type: string
+      socialToken:
+        type: string
+        required: true
+      type:
+        type: string
+        enum: 
+          - 'facebook'
+          - 'google'
+        required: true
+      deviceId:
+        type: string
+        required: true
+      deviceType:
+        type: string
+        enum: 
+          - 'web'
+          - 'android'
+          - 'ios'  
+        required: true
+      firebaseToken:
+        type: string
+        required: true     
+  user-account-verify:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      socialId:
+        type: string
+      socialToken:
+        type: string
+        required: true
+      type:
+        type: string
+        enum: 
+          - 'facebook'
+          - 'google'
+        required: true     
+  user-otp-verify:
+      type: object
+      properties:
+       otp:
+         type: integer
+         required: true          
+  signup-otp-verify:
+      type: object
+      properties:
+       email:
+          type: string
+          format: email
+          required: true
+       otp:
+         type: integer
+         required: true     
+  signup-otp-resend:     
+      type: object
+      properties:
+       email:
+          type: string
+          format: email
+          required: true                          

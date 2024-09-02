@@ -1,0 +1,222 @@
+paths:       
+  /admin/update-profile :
+    put:                
+      tags:               
+        - Admin           
+      summary: Admin Update Profile
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:         
+      - in: body          
+        name: update-profile     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/admin-update-profile' 
+      responses:          
+        '200':
+          description: An object
+  /admin/users:
+    get:                
+        tags:               
+          - Admin           
+        summary: User list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false  
+        responses:          
+          "200":
+            description: An object with user 
+  /admin/users/{userId}:                 
+    get:                
+      tags:               
+        - Admin           
+      summary: Get user detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: userId
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object 
+  /admin/users/{userId}/change-status:                 
+    put:                
+      tags:               
+        - Admin           
+      summary: User update status
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: userId
+        type: integer
+        required: true
+      - in: body          
+        name: user update status     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-user-status'    
+      responses:          
+        '200':
+          description: An object 
+  /admin/banner-page:
+    post:                
+      tags:               
+        - Admin           
+      summary: Update banner image and home page content
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: update banner and page content     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-update-banner-page'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - Admin           
+        summary: Get banner image and home page content
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: type
+          required: true
+          enum:
+            - 'top'
+            - 'bottom'
+            - 'staticBlock'
+        responses:          
+          "200":
+            description: An object 
+  /admin/dashboard:
+    get:                
+        tags:               
+          - Admin           
+        summary: dashboard details
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        responses:          
+          "200":
+            description: An object with dashboard detail 
+  /admin/footer-block:   
+    post:                
+      tags:               
+        - Admin           
+      summary: Update footer block details
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: update footer block     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-update-footer-block'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - Admin           
+        summary: Get footer block details
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        responses:          
+          "200":
+            description: An object                     
+definitions: 
+  admin-update-profile:
+    type: object
+    properties:
+      firstName:
+        type: string 
+      username:
+        type: string 
+  update-user-status :
+    type: object
+    properties:
+      status:
+        type: string
+        enum: 
+          - 'active'
+          - 'inactive'
+          - 'deleted'    
+  add-update-banner-page :
+    type: object
+    properties:
+      type:
+        type: string
+        enum: 
+          - 'top'
+          - 'bottom'    
+          - 'staticBlock'    
+      title:
+        type: string
+      subTitle:
+        type: string  
+      bannerImage:
+        type: string
+      description:
+        type: string
+      content:
+        type: string
+      buttonLabel:
+        type: string   
+  add-update-footer-block: 
+    type: object
+    properties:   
+      title1:
+        type: string
+      content1:
+        type: string 
+      title2:
+        type: string
+      content2:
+        type: string  
+      title3:
+        type: string
+      content3:
+        type: string                      
+       
+         
+  

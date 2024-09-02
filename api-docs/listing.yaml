@@ -1,0 +1,78 @@
+/languages:              
+    get:                
+      tags:               
+        - Listing           
+      summary: Language list
+      produces:
+      - application/json
+      security:
+          - BearerAuth: [] 
+      responses:          
+        "200":
+          description: An object with Language
+/currencies:              
+    get:                
+      tags:               
+        - Listing           
+      summary: Currency list
+      produces:
+      - application/json
+      security:
+          - BearerAuth: [] 
+      responses:          
+        "200":
+          description: An object with Language
+/country:
+  get:
+      tags:
+        - Listing
+      summary: Get all country list
+      # security:
+      #   - BearerAuth: []
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false
+        - in: query
+          name: search
+          description: 'Search for country name and country code'
+          type: string
+          required: false
+      responses:
+        '200':
+          description: OK          
+/state:
+    get:
+        tags:
+          - Listing
+        summary: Get all state list
+        # security:
+        #   - BearerAuth: []
+        produces:
+          - application/json
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: countryId
+            type: integer
+            required: false   
+          - in: query
+            name: search
+            description: 'Search for state name'
+            type: string
+            required: false
+        
+        responses:
+          '200':
+            description: OK
+             

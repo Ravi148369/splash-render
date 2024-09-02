@@ -1,0 +1,77 @@
+paths:       
+  /admin/owner-page-setting:  
+    post:                
+      tags:               
+        - Admin         
+      summary: Add Owner Page Setting
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: Owner Page Setting     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/owner-page-setting' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Admin           
+     summary: Get Owner Page Setting
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     parameters:
+        - in: query
+          name: type
+          type: string
+          enum:
+            - 'topBanner'
+            - 'list'
+            - 'inventory'
+            - 'review'
+            - 'rental'
+            - 'bottomBanner'
+          description:
+          required: false       
+     responses:          
+       200:
+         description: An array of object                               
+  
+definitions: 
+  owner-page-setting :
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+            - 'topBanner'
+            - 'list'
+            - 'inventory'
+            - 'review'
+            - 'rental'
+            - 'bottomBanner'  
+      ownerPageImage:
+        type: string
+      heading:
+        type: string
+      title:
+        type: string
+      description:
+        type: string      
+      content:
+        type: string
+      title2:
+        type: string
+      content2:
+        type: string
+      title3:
+        type: string
+      content3:
+        type: string
+      

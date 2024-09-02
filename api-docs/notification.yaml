@@ -1,0 +1,47 @@
+paths:       
+  /notification-list:          
+    get:                
+     tags:               
+       - Notification           
+     summary: Get all notification of user
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []     
+     parameters:
+        - in: query
+          name: limit
+          type: integer
+          required: false
+        - in: query
+          name: offset
+          type: integer
+          required: false    
+     responses:          
+       200:
+         description: An array of object  
+  /notification/update-read-status:          
+    put:                
+     tags:               
+       - Notification           
+     summary: Notification update status
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []     
+     responses:          
+       200:
+         description:   
+  /notification/unread-count:          
+    get:                
+     tags:               
+       - Notification           
+     summary: Get unread notification count 
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []         
+     responses:          
+       200:
+         description: An count of unread notification                                                 
+      

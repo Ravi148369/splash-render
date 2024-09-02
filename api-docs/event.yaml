@@ -1,0 +1,187 @@
+paths:       
+  /event :
+    post:                
+      tags:               
+        - Event          
+      summary: Add Event
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: event     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-event' 
+      responses:          
+        '200':
+          description: An object  
+    get:                
+      tags:               
+        - Event           
+      summary: Get Event list
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+        required: false
+      - in: query
+        name: offset
+        type: integer
+        required: false
+      - in: query
+        name: search
+        type: string
+        description:
+        required: false  
+      - in: query
+        name: type
+        type: string
+        enum:
+          - 'upcoming'
+          - 'ongoing'
+          - 'past'
+        description:
+        required: false 
+      - in: query
+        name: latitude
+        type: string
+        required: false
+      - in: query
+        name: longitude
+        type: string
+        required: false
+      - in: query
+        name: fromDate
+        type: date
+        required: false
+      - in: query
+        name: toDate
+        type: date
+        required: false
+      - in: query
+        name: sortBy
+        enum: ['eventName', 'boat', 'location', 'date', 'eventType', 'numberOfAttendee', 'hostedBy', ]
+        type: string
+        required: false
+      - in: query
+        name: sortType
+        enum: ['ASC', 'DESC']
+        type: string
+        required: false        
+      responses:          
+        "200":
+          description: An object
+  /event/{id}:                 
+    get:                
+      tags:               
+        - Event           
+      summary: Get Event detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object 
+    put:                
+      tags:               
+        - Event           
+      summary: Update Event Details
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: event   
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-event'    
+      responses:          
+        '200':
+          description: An object   
+  /event-transaction:
+    get:
+        tags:
+          - Event
+        summary: Event booking transaction List
+        produces:
+          - application/json
+        security:
+        - BearerAuth: [] 
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: offset
+            type: integer
+            required: false
+          - in: query
+            name: search
+            type: string
+            description:
+            required: false   
+        responses:
+          '200':
+            description: OK                                      
+
+definitions: 
+  add-event:
+    properties:
+      boatId:
+        type: integer 
+      name:    
+        type: string
+      eventType:    
+        type: string
+      location:    
+        type: string
+      latitude :    
+        type: string
+      longitude :    
+        type: string
+      eventDate :    
+        type: string
+      numberOfAttendee:    
+        type: integer
+      hostedBy :    
+        type: string
+      adultPrice :    
+        type: integer
+      childrenPrice :    
+        type: integer
+      currency :    
+        type: string      
+      description :    
+        type: string  
+      eventImages:
+          type: array
+          items: 
+           type: object
+           properties:
+              cover_image:
+                type: integer
+                required: false 
+              image:
+                type: string    
+                required: false
+           description: {image:basePath,cover_image:1}

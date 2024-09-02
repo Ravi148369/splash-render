@@ -1,0 +1,57 @@
+paths:       
+  /site-setting:  
+    post:                
+      tags:               
+        - Site Setting         
+      summary: Add Site Setting
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: Site Setting     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/site-setting' 
+      responses:          
+        '200':
+          description: An object           
+    get:                
+     tags:               
+       - Site Setting            
+     summary: Get Site Setting
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []            
+     responses:          
+       200:
+         description: A of object                               
+  
+ 
+definitions: 
+  site-setting :
+    type: object
+    properties:    
+      facebookUrl:
+        type: string    
+      twitterUrl    :
+        type: string
+      instagramUrl:
+        type: string
+      youTubeUrl:
+        type: string
+      pinterestUrl:
+        type: string
+      linkedinUrl:
+        type: string
+      tikTokUrl:
+        type: string 
+      email:
+        type: string
+      mobileNumber:
+        type: string
+      address:
+        type: string

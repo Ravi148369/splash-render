@@ -1,0 +1,66 @@
+paths:       
+  /cms/static-content-pages:              
+    get:                
+     tags:               
+       - Static Content Management           
+     summary: Get All Static Content Page
+     produces:
+     - application/json
+     security:
+       - BearerAuth: []      
+     responses:          
+       200:
+         description: An array of object  
+
+  /cms/static-content-pages/{id}:
+    put:                
+      tags:               
+        - Static Content Management           
+      summary: Static Content Page Update
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:  
+      - in: path
+        name: id
+        type: integer
+        required: true        
+      - in: body          
+        name: update-staticPage     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-staticPage' 
+      responses:          
+        '200':
+          description: An object       
+    get:                
+      tags:               
+        - Static Content Management           
+      summary: Get One Static Content Page
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true         
+      responses:          
+        '200':
+          description: An object                                   
+  
+ 
+definitions: 
+  update-staticPage :
+    type: object
+    properties:
+      content:
+        type: string 
+      metaTitle:
+        type: string 
+      metaDescription:
+        type: string        
+      

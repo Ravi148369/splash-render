@@ -1,0 +1,118 @@
+paths:
+  /bank-account:
+    post:
+      tags:
+        - Bank Account
+      summary: Owner add bank account to receive payouts
+      security:
+        - BearerAuth: []
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            '$ref': '#/definitions/addBankAccount'
+      responses:
+        '200':
+          description: OK  
+    get:                
+      tags:               
+        - Bank Account           
+      summary: Get Owner bank account
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []     
+      responses:          
+        200:
+          description: An array of object  
+  /transaction:
+    get:
+        tags:
+          - Bank Account
+        summary: Get all transaction list
+        produces:
+          - application/json
+        security:
+        - BearerAuth: [] 
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: offset
+            type: integer
+            required: false
+          - in: query
+            name: status
+            type: string
+            enum:
+              - 'pending'
+              - 'completed'
+          - in: query
+            name: scope
+            type: string
+            enum:
+              - 'all'
+            required: false
+          - in: query
+            name: boatId
+            type: integer
+            required: false
+        responses:
+          '200':
+            description: OK
+definitions:
+  addBankAccount:
+    type: object
+    properties:
+      accountHolderName:
+        type: string
+        required: true
+      bankName:
+        type: string
+        required: true
+      email:
+        type: string
+        format: email
+        required: true
+      bankLocation:
+        type: string
+        required: true
+      accountNumber:
+        type: string
+        required: true
+      routingNumber:
+        type: string
+        required: false
+      dateOfBirth:
+        type: string
+        required: true
+        description: Please format YYYY-MM-DD   
+      addressLine1:
+        type: string
+        required: false
+      city:
+        type: string
+        required: false
+      stateId:
+        type: integer
+      countryId:
+        type: integer
+      postalCode:
+        type: string
+        required: false
+      phone:
+        type: string
+        required: false
+      ssn:
+        type: string
+        required: false
+      taxClassification:
+        type: string
+        enum: 
+          - 'individual'
+          - 'company'  

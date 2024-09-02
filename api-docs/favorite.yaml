@@ -1,0 +1,151 @@
+paths:       
+  /user/favorite-list:
+    post:                
+      tags:               
+        - User           
+      summary: Add favorite list
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: favorite list   
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-favorite-list'   
+      responses:          
+        "200":
+          description: An object 
+    get:                
+        tags:               
+          - User           
+        summary: Get all favorite list
+        produces:
+        - application/json
+        security:
+          - BearerAuth: [] 
+        parameters:
+        - in: query
+          name: search
+          type: string
+          description:
+          required: false  
+        responses:          
+          "200":
+            description: An object     
+  /user/favorite-boat:
+    post:                
+      tags:               
+        - User           
+      summary: Add or update favorite boat
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: favorite boat   
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-favorite-boat'   
+      responses:          
+        "200":
+          description: An object  
+  /user/favorite-event:
+    post:                
+      tags:               
+        - User           
+      summary: Add or update favorite event
+      produces:
+      - application/json
+      security:
+        - BearerAuth: [] 
+      parameters:
+      - in: body          
+        name: favorite event   
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-favorite-event'   
+      responses:          
+        "200":
+          description: An object  
+    get:                
+      tags:               
+        - User           
+      summary: Get all favorite event list
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      responses:          
+        "200":
+          description: An object        
+  /user/favorite-list/{id}:
+    put:                
+      tags:               
+        - User           
+      summary: Update favorite list
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true
+      - in: body          
+        name: favorite list   
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-favorite-list'    
+      responses:          
+        '200':
+          description: An object   
+    delete:                
+      tags:               
+        - User           
+      summary: Deleted favorite list
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      responses:          
+        '200':
+          description: An object                                                       
+definitions:    
+  add-favorite-list :
+    type: object
+    properties:
+      name:
+        type: string    
+  add-favorite-boat :
+    type: object
+    properties:
+      boatId:
+        type: integer    
+      listId:
+        type: integer    
+  add-favorite-event :
+    type: object
+    properties:
+      eventId:
+        type: integer    
+  update-favorite-list :
+    type: object
+    properties:
+      name:
+        type: string                                     
+       
+         
+  

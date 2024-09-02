@@ -1,0 +1,478 @@
+paths:       
+  /boat :
+    post:                
+      tags:               
+        - Boat          
+      summary: Add Boat
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: boat     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/add-boat' 
+      responses:          
+        '200':
+          description: An object        
+    get:
+        tags:
+          - Boat
+        summary: Boat List
+        produces:
+          - application/json
+        security:
+        - BearerAuth: [] 
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: offset
+            type: integer
+            required: false
+          - in: query
+            name: name
+            type: string
+            required: false
+          - in: query
+            name: scope
+            type: string
+            enum:
+              - 'all'
+              - 'manageBoat'
+            required: false
+          - in: query
+            name: isRecommended
+            type: string
+            enum:
+              - 'true'
+            required: false    
+          - in: query
+            name: latitude
+            type: string
+            required: false
+          - in: query
+            name: longitude
+            type: string
+            required: false
+          - in: query
+            name: boatTypeId
+            type: integer
+            required: false
+          - in: query
+            name: fromDate
+            type: date
+            required: false
+        responses:
+          '200':
+            description: OK
+  /boat/{id}:              
+    get:                
+      tags:               
+       - Boat           
+      summary: Get Boat Detail
+      produces:
+        - application/json
+      security:
+       - BearerAuth: []     
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:          
+       200:
+         description: An object with Boat Detail
+    put:                
+      tags:               
+        - Boat          
+      summary: Update Boat
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        required: true      
+      - in: body          
+        name: boat     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/update-boat' 
+      responses:          
+        '200':
+          description: An object       
+    delete:                
+      tags:               
+        - Boat           
+      summary: Boat Deleted
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters: 
+      - in: path
+        name: id
+        type: integer
+        required: true   
+      responses:          
+        '200':
+          description: An object           
+  /boat/images :
+    post:                
+      tags:               
+        - Boat          
+      summary: Boat Images
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: boat     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/boat-images' 
+      responses:          
+        '200':
+          description: An object             
+  /boat/detail :
+    post:                
+      tags:               
+        - Boat          
+      summary: Boat Booking Detail
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:        
+      - in: body          
+        name: boat     
+        description:
+        required: false
+        schema:          
+          $ref: '#/definitions/boat-detail' 
+      responses:          
+        '200':
+          description: An object             
+  /boat/{id}/change-status :
+    put:                
+      tags:               
+        - Boat          
+      summary: Update Boat Status
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:  
+        - in: path
+          name: id
+          type: integer
+          required: true            
+        - in: body          
+          name: boat     
+          description:
+          required: false
+          schema:          
+            $ref: '#/definitions/update-boat-status'      
+      responses:          
+        '200':
+          description: An object
+  /boat/{id}/recommend :
+    put:                
+      tags:               
+        - Boat          
+      summary: Boat Recommend
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:  
+        - in: path
+          name: id
+          type: integer
+          required: true            
+        - in: body          
+          name: boat     
+          description:
+          required: false
+          schema:          
+            $ref: '#/definitions/boat-recommend'      
+      responses:          
+        '200':
+          description: An object
+  /boat/{id}/isBooking :
+    put:                
+      tags:               
+        - Boat          
+      summary: Boat booking
+      produces:
+      - application/json
+      security:
+        - BearerAuth: []
+      parameters:  
+        - in: path
+          name: id
+          type: integer
+          required: true            
+        - in: body          
+          name: boat     
+          description:
+          required: false
+          schema:          
+            $ref: '#/definitions/boat-booking'      
+      responses:          
+        '200':
+          description: An object          
+  /manage-boat-list:
+    get:
+        tags:
+          - Boat
+        summary: Owner Boat List
+        produces:
+          - application/json
+        security:
+        - BearerAuth: [] 
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: offset
+            type: integer
+            required: false
+          - in: query
+            name: name
+            type: string
+            required: false
+          - in: query
+            name: status
+            type: string
+            enum:
+              - 'pending'
+              - 'completed'
+          - in: query
+            name: scope
+            type: string
+            enum:
+              - 'all'
+              - 'manageBoat'
+            required: false
+          - in: query
+            name: isRecommended
+            type: string
+            enum:
+              - 'true'
+            required: false    
+          - in: query
+            name: latitude
+            type: string
+            required: false
+          - in: query
+            name: longitude
+            type: string
+            required: false
+          - in: query
+            name: boatTypeId
+            type: integer
+            required: false
+          - in: query
+            name: fromDate
+            type: date
+            required: false
+          - in: query
+            name: toDate
+            type: date
+            required: false
+        responses:
+          '200':
+            description: OK
+  /boat-transaction:
+    get:
+        tags:
+          - Boat
+        summary: Boat booking transaction List
+        produces:
+          - application/json
+        security:
+        - BearerAuth: [] 
+        parameters:
+          - in: query
+            name: limit
+            type: integer
+            required: false
+          - in: query
+            name: offset
+            type: integer
+            required: false
+          - in: query
+            name: search
+            type: string
+            description:
+            required: false  
+        responses:
+          '200':
+            description: OK            
+definitions: 
+  boat-images:
+    properties:
+      boatId:    
+        type: integer  
+      boatImages:
+          type: array
+          items: 
+           type: object
+           properties:
+              cover_image:
+                type: integer
+                required: false 
+              image:
+                type: string    
+                required: false
+           description: {image:basePath,cover_image:1}
+      description:
+        type: string 
+      name:    
+        type: string     
+  boat-detail:
+    properties:
+      boatId:    
+        type: integer 
+      boatRuleIds:
+          type: array
+          items: 
+           type: array
+      cancellationPolicy:
+        type: string
+        enum: 
+          - 'flexible'
+          - 'moderate'
+          - 'strict'          
+      boatPrices:
+          type: array
+          items: 
+           type: object
+           properties:
+              duration:
+                type: string
+                required: false 
+              amount:
+                type: integer    
+                required: false
+      currency:
+        type: string
+      # boatAvaliable:
+      #     type: array
+      #     items: 
+      #      type: object
+      #      properties:
+      #         startDate:
+      #           type: string
+      #           required: false 
+      #         endDate:
+      #           type: string    
+      #           required: false
+      boatBlockDates:
+          type: array
+          items: 
+           type: array 
+      status:
+        type: string
+        enum: 
+          - 'pending'
+          - 'completed'        
+  add-boat:
+    properties:
+      typeId:
+        type: integer 
+      length:    
+        type: string
+      makeId:    
+        type: integer
+      modelId:    
+        type: integer
+      numberOfPassenger:    
+        type: integer
+      yearId :    
+        type: integer
+      countryId :    
+        type: integer
+      stateId :    
+        type: integer
+      city :    
+        type: string
+      streetAddress :    
+        type: string
+      zipCode :    
+        type: string
+      latitude :    
+        type: string
+      longitude :    
+        type: string
+      boatFeatureIds:
+          type: array
+          items: 
+           type: array   
+  update-boat:
+    properties:
+      typeId:
+        type: integer 
+      length:    
+        type: string
+      makeId:    
+        type: integer
+      modelId:    
+        type: integer
+      numberOfPassenger:    
+        type: integer
+      yearId :    
+        type: integer
+      countryId :    
+        type: integer
+      stateId :    
+        type: integer
+      city :    
+        type: string
+      streetAddress :    
+        type: string
+      zipCode :    
+        type: string
+      latitude :    
+        type: string
+      longitude :    
+        type: string
+      boatFeatureIds:
+          type: array
+          items: 
+           type: array  
+  update-boat-status:
+    properties:
+      status:
+        type: string
+        enum:
+          - 'listed'           
+          - 'unlisted'    
+  boat-recommend:
+    properties:
+      isRecommended:
+        type: integer
+        enum:
+          - 0           
+          - 1     
+  boat-booking:
+    properties:
+      isBooking:
+        type: integer
+        enum:
+          - 0           
+          - 1                          
